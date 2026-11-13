@@ -6,6 +6,12 @@
 
 **Primetime** ist eine moderne Community-Website auf **PHP & MySQL**: Wall, Forum, Gruppen, Nachrichten, Mitgliederbereich und ein vollständiges Admin-Panel – self-hosted, erweiterbar und für Gaming- und Spaß-Communities gedacht.
 
+# <p>
+  <a href="https://test.srv-src.de" target="_blank" rel="noopener">
+    🔗 Live-Demo ansehen
+  </a>
+</p>
+
 <p align="center">
   <img src="https://about.steel-assassins.de/Logos/hero-community.jpg" alt="Primetime Community Oberfläche" width="100%">
 </p>
