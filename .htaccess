@@ -1,0 +1,46 @@
+# ===== Sicherheit & Grundeinstellungen =====
+Options -Indexes
+ServerSignature Off
+
+# HTTPS erzwingen
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# Sensible Ordner/Dateien sperren
+<IfModule mod_rewrite.c>
+RewriteRule ^(config|includes|backups)/ - [F,L]
+</IfModule>
+<FilesMatch "(^\.|\.(sql|log|bak|ini|md|txt|zip|sh)$)">
+    Require all denied
+</FilesMatch>
+# robots.txt und sitemap bleiben erreichbar
+<Files "robots.txt">
+    Require all granted
+</Files>
+
+# Security-Header
+<IfModule mod_headers.c>
+Header always set X-Content-Type-Options "nosniff"
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+Header always set Strict-Transport-Security "max-age=31536000"
+</IfModule>
+
+# Eigene Fehlerseiten (404.php/500.php später anlegen, Zeilen dann aktivieren)
+# ErrorDocument 404 /404.php
+# ErrorDocument 500 /500.php
+
+# Caching für statische Dateien
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType text/css "access plus 1 week"
+ExpiresByType application/javascript "access plus 1 week"
+ExpiresByType image/png "access plus 1 month"
+ExpiresByType image/jpeg "access plus 1 month"
+ExpiresByType image/webp "access plus 1 month"
+</IfModule>
